@@ -4,7 +4,7 @@
  *
  * Copyright 2015 ruhley
  *
- * 2016-01-28 08:06:38
+ * 2016-02-01 16:47:21
  *
  */
 if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
@@ -33,7 +33,6 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                 colorPickerSwatch: '=',
                 colorPickerSwatchOnly: '=',
                 colorPickerSwatchPos: '=',
-                colorPickerSwatchBootstrap: '=',
                 colorPickerOnChange: '&',
             },
             templateUrl: 'template/color-picker/directive.html',
@@ -164,7 +163,6 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                     $scope.config.swatch = $scope.colorPickerSwatch === undefined ? true : $scope.colorPickerSwatch;
                     $scope.config.swatchOnly = $scope.colorPickerSwatchOnly === undefined ? false : $scope.colorPickerSwatchOnly;
                     $scope.config.swatchPos = $scope.colorPickerSwatchPos === undefined ? 'left' : $scope.colorPickerSwatchPos;
-                    $scope.config.swatchBootstrap = $scope.colorPickerSwatchBootstrap === undefined ? true : $scope.colorPickerSwatchBootstrap;
                     $scope.log('Color Picker: Config', $scope.config);
                 };
 
@@ -296,7 +294,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                 );
 
                 $scope.$watchGroup(
-                    ['colorPickerSwatchPos', 'colorPickerSwatchBootstrap', 'colorPickerSwatchOnly', 'colorPickerSwatch', 'colorPickerPos'],
+                    ['colorPickerSwatchPos', 'colorPickerSwatchOnly', 'colorPickerSwatch', 'colorPickerPos'],
                     function (newValue, oldValue) {
                         if (newValue !== undefined) {
                             $scope.initConfig();
@@ -587,10 +585,10 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 angular.module('color.picker').run(['$templateCache', function($templateCache) {
     $templateCache.put('template/color-picker/directive.html',
         '<div class="color-picker-wrapper" ng-class="{\'color-picker-swatch-only\': config.swatchOnly}">\n' +
-        '   <div ng-class="{\'input-group\': config.swatchBootstrap && config.swatch}">\n' +
-        '       <span ng-if="config.swatchPos === \'left\'" ng-attr-style="background-color: {{swatchColor}};" class="color-picker-swatch" ng-click="focus()" ng-show="config.swatch" ng-class="{\'color-picker-swatch-left\': config.swatchPos !== \'right\', \'color-picker-swatch-right\': config.swatchPos === \'right\', \'input-group-addon\': config.swatchBootstrap}"></span>\n' +
-        '       <input class="color-picker-input form-control" type="text" ng-model="ngModel" ng-change="onChange($event)" size="7" ng-focus="show()" ng-class="{\'color-picker-input-swatch\': config.swatch && !config.swatchOnly && config.swatchPos === \'left\'}">\n' +
-        '       <span ng-if="config.swatchPos === \'right\'" ng-attr-style="background-color: {{swatchColor}};" class="color-picker-swatch" ng-click="focus()" ng-show="config.swatch" ng-class="{\'color-picker-swatch-left\': config.swatchPos !== \'right\', \'color-picker-swatch-right\': config.swatchPos === \'right\', \'input-group-addon\': config.swatchBootstrap}"></span>\n' +
+        '   <div>\n' +
+        '       <span ng-if="config.swatchPos === \'left\'" ng-attr-style="background-color: {{swatchColor}};" class="color-picker-swatch" ng-click="focus()" ng-show="config.swatch" ng-class="{\'color-picker-swatch-left\': config.swatchPos !== \'right\', \'color-picker-swatch-right\': config.swatchPos === \'right\'}"></span>\n' +
+        '       <input class="color-picker-input" type="text" ng-model="ngModel" ng-change="onChange($event)" size="7" ng-focus="show()" ng-class="{\'color-picker-input-swatch\': config.swatch && !config.swatchOnly && config.swatchPos === \'left\'}">\n' +
+        '       <span ng-if="config.swatchPos === \'right\'" ng-attr-style="background-color: {{swatchColor}};" class="color-picker-swatch" ng-click="focus()" ng-show="config.swatch" ng-class="{\'color-picker-swatch-left\': config.swatchPos !== \'right\', \'color-picker-swatch-right\': config.swatchPos === \'right\'}"></span>\n' +
         '   </div>\n' +
         '   <div class="color-picker-panel" ng-show="visible" ng-class="{\n' +
         '       \'color-picker-panel-top color-picker-panel-right\': config.pos === \'top right\',\n' +
